@@ -1,6 +1,6 @@
 require 'mail'
 
-class Assigner
+class Mailer
   def initialize(assignments, host_email = 'noreply@example.com')
     @assignments = assignments
     @host_email = host_email
@@ -24,7 +24,7 @@ class Assigner
   end
 end
 
-class GifteeList
+class GifteeListAssigner
   attr_reader :santas
 
   def initialize(santas)

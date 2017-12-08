@@ -1,9 +1,9 @@
 require 'mail'
-require_relative './assigner'
+require_relative './secret_santa'
 
 describe 'GifteeList' do
   it 'assigns everyone a giftee without sub-loops' do
-    list = GifteeList.new([
+    list = GifteeListAssigner.new([
                             { name: 'Sandrine', email: 'sandrine@example.com' },
                             { name: 'Ella', email: 'ella@example.com' },
                             { name: 'Nicole', email: 'nicole@example.com' },
@@ -27,14 +27,14 @@ describe 'GifteeList' do
   end
 end
 
-describe 'Assigner' do
+describe 'Mailer' do
   it 'sends an email to each santa about their giftee' do
     assignments = [
       { name: 'Denise', email: 'denise@example.com', giftee: 'Spike' },
       { name: 'Spike', email: 'spike@example.com', giftee: 'Denise' }
     ]
 
-    assigner = Assigner.new(assignments, 'secretsantahost@example.com')
+    assigner = Mailer.new(assignments, 'secretsantahost@example.com')
     allow(assigner).to receive(:mail_to)
 
     expect(assigner).to receive(:mail_to).twice
